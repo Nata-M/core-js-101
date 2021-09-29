@@ -18,11 +18,9 @@
  *   'aa',''    => 'aa'
  *   '',  'bb'  => 'bb'
  */
-function concatenateStrings(/* value1, value2 */) {
-  throw new Error('Not implemented');
+function concatenateStrings(value1, value2) {
+  return value1.concat('', value2);
 }
-
-
 /**
  * Returns the length of given string.
  *
@@ -34,8 +32,8 @@ function concatenateStrings(/* value1, value2 */) {
  *   'b'     => 1
  *   ''      => 0
  */
-function getStringLength(/* value */) {
-  throw new Error('Not implemented');
+function getStringLength(value) {
+  return value.length;
 }
 
 /**
@@ -51,8 +49,8 @@ function getStringLength(/* value */) {
  *   'John','Doe'      => 'Hello, John Doe!'
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
-function getStringFromTemplate(/* firstName, lastName */) {
-  throw new Error('Not implemented');
+function getStringFromTemplate(firstName, lastName) {
+  return `Hello, ${firstName} ${lastName}!`;
 }
 
 /**
@@ -65,8 +63,8 @@ function getStringFromTemplate(/* firstName, lastName */) {
  *   'Hello, John Doe!' => 'John Doe'
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
-function extractNameFromTemplate(/* value */) {
-  throw new Error('Not implemented');
+function extractNameFromTemplate(value) {
+  return value.slice(7, value.length - 1);
 }
 
 
@@ -80,8 +78,8 @@ function extractNameFromTemplate(/* value */) {
  *   'John Doe'  => 'J'
  *   'cat'       => 'c'
  */
-function getFirstChar(/* value */) {
-  throw new Error('Not implemented');
+function getFirstChar(value) {
+  return value[0];
 }
 
 /**
@@ -95,8 +93,8 @@ function getFirstChar(/* value */) {
  *   'cat'              => 'cat'
  *   '\tHello, World! ' => 'Hello, World!'
  */
-function removeLeadingAndTrailingWhitespaces(/* value */) {
-  throw new Error('Not implemented');
+function removeLeadingAndTrailingWhitespaces(value) {
+  return value.trim();
 }
 
 /**
@@ -110,8 +108,8 @@ function removeLeadingAndTrailingWhitespaces(/* value */) {
  *   'A', 5  => 'AAAAA'
  *   'cat', 3 => 'catcatcat'
  */
-function repeatString(/* value, count */) {
-  throw new Error('Not implemented');
+function repeatString(value, count) {
+  return value.repeat(count);
 }
 
 /**
@@ -126,8 +124,8 @@ function repeatString(/* value, count */) {
  *   'I like legends', 'end' => 'I like legs',
  *   'ABABAB','BA' => 'ABAB'
  */
-function removeFirstOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeFirstOccurrences(str, value) {
+  return str.replace(value, '');
 }
 
 /**
@@ -141,8 +139,8 @@ function removeFirstOccurrences(/* str, value */) {
  *   '<span>' => 'span'
  *   '<a>' => 'a'
  */
-function unbracketTag(/* str */) {
-  throw new Error('Not implemented');
+function unbracketTag(str) {
+  return str.substring(1, str.length - 1);
 }
 
 
@@ -156,8 +154,8 @@ function unbracketTag(/* str */) {
  *   'Thunderstruck' => 'THUNDERSTRUCK'
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
-function convertToUpperCase(/* str */) {
-  throw new Error('Not implemented');
+function convertToUpperCase(str) {
+  return str.toUpperCase();
 }
 
 /**
@@ -175,8 +173,8 @@ function convertToUpperCase(/* str */) {
  *   ],
  *   'info@gmail.com' => ['info@gmail.com']
  */
-function extractEmails(/* str */) {
-  throw new Error('Not implemented');
+function extractEmails(str) {
+  return str.split(';');
 }
 
 /**
@@ -202,8 +200,11 @@ function extractEmails(/* str */) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleString(width, height) {
+  const first = '┌'.concat('─'.repeat(width - 2)).concat('┐\n');
+  const second = '│'.concat(' '.repeat(width - 2)).concat('│\n');
+  const third = '└'.concat('─'.repeat(width - 2)).concat('┘\n');
+  return first.concat(second.repeat(height - 2)).concat(third);
 }
 
 
@@ -223,8 +224,15 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const input = ' ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ?!';
+  const output = ' NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm ?!';
+  let encoded = '';
+  for (let i = 0; i < str.length; i += 1) {
+    const index = input.indexOf(str[i]);
+    encoded += output[index];
+  }
+  return encoded;
 }
 
 /**
@@ -240,8 +248,8 @@ function encodeToRot13(/* str */) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  throw new Error('Not implemented');
+function isString(value) {
+  return (typeof value === 'string' || value instanceof String);
 }
 
 
@@ -269,8 +277,168 @@ function isString(/* value */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  let x = 0;
+  // for (let i = 0; i < value.length; i += 1) {
+  //   x = i;
+  // }
+  if (value === 'A♣') {
+    x = 0;
+  }
+  if (value === '2♣') {
+    x = 1;
+  }
+  if (value === '3♣') {
+    x = 2;
+  }
+  if (value === '4♣') {
+    x = 3;
+  }
+  if (value === '5♣') {
+    x = 4;
+  }
+  if (value === '6♣') {
+    x = 5;
+  }
+  if (value === '7♣') {
+    x = 6;
+  }
+  if (value === '8♣') {
+    x = 7;
+  }
+  if (value === '9♣') {
+    x = 8;
+  }
+  if (value === '10♣') {
+    x = 9;
+  }
+  if (value === 'J♣') {
+    x = 10;
+  }
+  if (value === 'Q♣') {
+    x = 11;
+  }
+  if (value === 'K♣') {
+    x = 12;
+  }
+  if (value === 'A♦') {
+    x = 13;
+  }
+  if (value === '2♦') {
+    x = 14;
+  }
+  if (value === '3♦') {
+    x = 15;
+  }
+  if (value === '4♦') {
+    x = 16;
+  }
+  if (value === '5♦') {
+    x = 17;
+  }
+  if (value === '6♦') {
+    x = 18;
+  }
+  if (value === '7♦') {
+    x = 19;
+  }
+  if (value === '8♦') {
+    x = 20;
+  }
+  if (value === '9♦') {
+    x = 21;
+  }
+  if (value === '10♦') {
+    x = 22;
+  }
+  if (value === 'J♦') {
+    x = 23;
+  }
+  if (value === 'Q♦') {
+    x = 24;
+  }
+  if (value === 'K♦') {
+    x = 25;
+  }
+  if (value === 'A♥') {
+    x = 26;
+  }
+  if (value === '2♥') {
+    x = 27;
+  }
+  if (value === '3♥') {
+    x = 28;
+  }
+  if (value === '4♥') {
+    x = 29;
+  }
+  if (value === '5♥') {
+    x = 30;
+  }
+  if (value === '6♥') {
+    x = 31;
+  }
+  if (value === '7♥') {
+    x = 32;
+  }
+  if (value === '8♥') {
+    x = 33;
+  }
+  if (value === '9♥') {
+    x = 34;
+  }
+  if (value === '10♥') {
+    x = 35;
+  }
+  if (value === 'J♥') {
+    x = 36;
+  }
+  if (value === 'Q♥') {
+    x = 37;
+  }
+  if (value === 'K♥') {
+    x = 38;
+  }
+  if (value === 'A♠') {
+    x = 39;
+  }
+  if (value === '2♠') {
+    x = 40;
+  }
+  if (value === '3♠') {
+    x = 41;
+  }
+  if (value === '4♠') {
+    x = 42;
+  }
+  if (value === '5♠') {
+    x = 43;
+  }
+  if (value === '6♠') {
+    x = 44;
+  }
+  if (value === '7♠') {
+    x = 45;
+  }
+  if (value === '8♠') {
+    x = 46;
+  }
+  if (value === '9♠') {
+    x = 47;
+  }
+  if (value === '10♠') {
+    x = 48;
+  }
+  if (value === 'J♠') {
+    x = 49;
+  }
+  if (value === 'Q♠') {
+    x = 50;
+  }
+  if (value === 'K♠') {
+    x = 51;
+  }
+  return x;
 }
 
 
